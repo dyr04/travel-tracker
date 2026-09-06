@@ -2,10 +2,13 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { getSupabase } from "../lib/supabase";
-const supabase = typeof window !== "undefined" ? getSupabase() : null;
 import { seedState } from "../lib/seed";
 import Dashboard from "../components/Dashboard";
 import { Globe2, Mail } from "lucide-react";
+
+export const dynamic = "force-dynamic";
+
+const supabase = getSupabase();
 
 const C = {
   jade: "#1f7a5c", jadeDeep: "#0f4a37", gold: "#e0a13c",
@@ -76,9 +79,9 @@ export default function Page() {
     return () => clearTimeout(saveTimer.current);
   }, [state, session, persist]);
 
-  if (checking) return <Splash text="Loading\u2026" />;
+  if (checking) return <Splash text="Loading…" />;
   if (!session) return <Login />;
-  if (loadingData || !state) return <Splash text="Loading your trips\u2026" />;
+  if (loadingData || !state) return <Splash text="Loading your trips…" />;
 
   return (
     <Dashboard
@@ -155,7 +158,7 @@ function Login() {
               disabled={busy}
               style={{ marginTop: 14, width: "100%", background: C.jade, color: "#fff", border: "none", borderRadius: 8, padding: "12px", fontSize: 15, fontWeight: 600, cursor: "pointer", display: "flex", gap: 8, alignItems: "center", justifyContent: "center", opacity: busy ? .7 : 1 }}
             >
-              <Mail size={17} /> {busy ? "Sending\u2026" : "Send login link"}
+              <Mail size={17} /> {busy ? "Sending…" : "Send login link"}
             </button>
           </>
         )}
