@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { supabase } from "../lib/supabase";
+import { getSupabase } from "../lib/supabase";
+const supabase = typeof window !== "undefined" ? getSupabase() : null;
 import { seedState } from "../lib/seed";
 import Dashboard from "../components/Dashboard";
 import { Globe2, Mail } from "lucide-react";
